@@ -1,0 +1,27 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /sm-library
+spring:
+  profiles:
+    activate: "dev"
+  datasource:
+    url: jdbc:h2:file:/data/demo
+    username: sa
+    password: password
+    driverClassName: org.h2.Driver
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
+    generate-ddl: true
+    hibernate.ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  h2:
+    console.enabled: true  
+
+springdoc.show-actuator: true  
+#springdoc.use-management-port: true
+#management.endpoints.web.exposure.include: openapi, swagger-ui
+#management.server.port: 8092
