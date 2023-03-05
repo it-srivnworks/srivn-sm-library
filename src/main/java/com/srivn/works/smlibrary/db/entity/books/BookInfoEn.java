@@ -1,6 +1,6 @@
 package com.srivn.works.smlibrary.db.entity.books;
 
-import com.srivn.works.smlibrary.db.entity.common.ClassificationValueEn;
+import com.srivn.works.smlibrary.db.entity.common.ClsnValueEn;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,18 +11,17 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+
+@Data
 @Entity
-@Table(name = "BOOK_DETAILS")
-public class BookDetailsEn {
+@Table(name = "BOOK_INFO")
+public class BookInfoEn {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
-	@SequenceGenerator(name = "book_seq", sequenceName = "book_seq", allocationSize = 1)
+	@SequenceGenerator(name = "book_seq", sequenceName = "book_seq",initialValue = 100, allocationSize = 1)
 	@Column(name = "ID")
 	private int id;
 	
@@ -40,7 +39,7 @@ public class BookDetailsEn {
 	
 	@ManyToOne
 	@JoinColumn(name = "CATEGORY")
-	private ClassificationValueEn category;
+	private ClsnValueEn category;
 
 	@Column(name = "units")
 	private int units;

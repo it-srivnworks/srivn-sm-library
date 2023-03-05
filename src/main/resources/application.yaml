@@ -21,7 +21,8 @@ spring:
   h2:
     console.enabled: true  
 
-springdoc.show-actuator: true  
+#springdoc.show-actuator: true
+  
 #springdoc.use-management-port: true
 #management.endpoints.web.exposure.include: openapi, swagger-ui
 #management.server.port: 8092

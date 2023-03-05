@@ -11,25 +11,30 @@ import jakarta.persistence.Table;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.cache.annotation.Cacheable;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
-@Setter
+@Data
 @Entity
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "CLSN")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ClassificationEn {
+public class ClsnEn {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLSN_SEQ")
-	@SequenceGenerator(name = "CLSN_SEQ", sequenceName = "CLSN_SEQ", allocationSize = 1)
+	@SequenceGenerator(name = "CLSN_SEQ", sequenceName = "CLSN_SEQ", initialValue = 100, allocationSize = 1)
 	@Column(name = "CLSN_ID")
 	private int clsnId;
-	
+
 	@Column(name = "CLSN_DS")
-	private int clsnDes;
-	
-	
+	private String clsnDes;
+
 }
