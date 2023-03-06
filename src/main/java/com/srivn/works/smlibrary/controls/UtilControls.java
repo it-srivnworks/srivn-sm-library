@@ -30,14 +30,14 @@ public class UtilControls {
 		return new ResponseEntity<>(utilServices.addClsnValue(clsnDes,clsnValue), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getClsnByDes" , produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getClsnByDes(@RequestParam String clsnDes) {
-		return new ResponseEntity<>(utilServices.getClsnByDes(clsnDes), HttpStatus.OK);
+	@GetMapping(value = "/getByClsnDes" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getByClsnDes(@RequestParam String clsnDes) {
+		return new ResponseEntity<>(utilServices.getByClsnDes(clsnDes), HttpStatus.OK);
 	}
 	
-	@GetMapping(value = "/getClsnByVal" , produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getClsnByVal(@RequestParam String clsnVal) {
-		return new ResponseEntity<>(utilServices.getClsnValByValue(clsnVal), HttpStatus.OK);
+	@GetMapping(value = "/getByClsnVal" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getByClsnVal(@RequestParam String clsnVal) {
+		return new ResponseEntity<>(utilServices.getByClsnValue(clsnVal), HttpStatus.OK);
 	}
 	
 	@GetMapping(value = "/getClsnAll" , produces = MediaType.APPLICATION_JSON_VALUE)
@@ -48,5 +48,39 @@ public class UtilControls {
 	@GetMapping(value = "/getClsnValAll" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> getClsnValAll() {
 		return new ResponseEntity<>(utilServices.getClsnValAll(), HttpStatus.OK);
+	}
+	
+	/**
+	 * Data 
+	 */
+	@PostMapping(value = "/addDataCat", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addDataCat(@RequestParam String dataCategory) {
+		return new ResponseEntity<>(utilServices.addDataCat(dataCategory), HttpStatus.OK);
+	}
+	
+	@PostMapping(value = "/addDataValue", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> addDataValue(@RequestParam String dataCategory,String addDataValue) {
+		return new ResponseEntity<>(utilServices.addDataValue(dataCategory,addDataValue), HttpStatus.OK);
+	}
+	
+	
+	@GetMapping(value = "/getByCatValue" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getByCatValue(@RequestParam String catValue) {
+		return new ResponseEntity<>(utilServices.getByCatValue(catValue), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getByDataValue" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getByDataValue(@RequestParam String dataValue) {
+		return new ResponseEntity<>(utilServices.getByDataValue(dataValue), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getDataCategoryAll" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getDataCategoryAll() {
+		return new ResponseEntity<>(utilServices.getDataCategoryAll(), HttpStatus.OK);
+	}
+	
+	@GetMapping(value = "/getDataValueAll" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getDataValueAll() {
+		return new ResponseEntity<>(utilServices.getDataValueAll(), HttpStatus.OK);
 	}
 }

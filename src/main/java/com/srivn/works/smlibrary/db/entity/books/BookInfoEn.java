@@ -1,6 +1,7 @@
 package com.srivn.works.smlibrary.db.entity.books;
 
 import com.srivn.works.smlibrary.db.entity.common.ClsnValueEn;
+import com.srivn.works.smlibrary.db.entity.common.DataValueEn;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,25 +21,27 @@ import lombok.Data;
 public class BookInfoEn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "book_seq")
-	@SequenceGenerator(name = "book_seq", sequenceName = "book_seq",initialValue = 100, allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_book")
+	@SequenceGenerator(name = "seq_book", sequenceName = "seq_book",initialValue = 100, allocationSize = 1)
 	@Column(name = "ID")
 	private int id;
 	
 	@Column(name = "TITLE")
 	private String title;
-	
-	@Column(name = "AUTHOR")
-	private String author;
 
-	@Column(name = "PUBLICATION")
-	private String publlication;
-	
 	@Column(name = "ISBN")
 	private String isbn;
 	
 	@ManyToOne
-	@JoinColumn(name = "CATEGORY")
+	@JoinColumn(name = "authorId")
+	private AuthorInfoEn author;
+
+	@ManyToOne
+	@JoinColumn(name = "DATA_VALUE_ID")
+	private DataValueEn publlication;
+	
+	@ManyToOne
+	@JoinColumn(name = "CLSN_VAL_ID")
 	private ClsnValueEn category;
 
 	@Column(name = "units")

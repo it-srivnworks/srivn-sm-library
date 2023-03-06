@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
@@ -14,27 +16,29 @@ import org.springframework.cache.annotation.Cacheable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
+
 
 @Data
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "CLSN")
+@Table(name = "DATA_VALUE")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ClsnEn {
+public class DataValueEn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_clsn")
-	@SequenceGenerator(name = "seq_clsn", sequenceName = "seq_clsn", initialValue = 100, allocationSize = 1)
-	@Column(name = "CLSN_ID")
-	private int clsnId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_data_value")
+	@SequenceGenerator(name = "seq_data_value", sequenceName = "seq_data_value", initialValue = 1000,allocationSize = 1)
+	@Column(name = "DATA_VALUE_ID")
+	private int dataValId;
+	
+	@Column(name = "DATA_VALUE")
+	private String dataValue;
 
-	@Column(name = "CLSN_DS")
-	private String clsnDes;
-
+	@ManyToOne
+	@JoinColumn(name = "CAT_ID")
+	DataCategoryEn dataCat;
 }

@@ -1,25 +1,22 @@
 server:
-  port: 8091
+  port: 8092
   servlet:
     context-path: /sm-library
 spring:
-  profiles:
-    activate: "dev"
   datasource:
-    url: jdbc:h2:file:/data/demo
-    username: sa
-    password: password
-    driverClassName: org.h2.Driver
+    url: jdbc:mysql://localhost:3306/smaster
+    username: smaster
+    password: smaster
   jpa:
-    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect
-    generate-ddl: true
-    hibernate.ddl-auto: update
-    show-sql: true
+    hibernate:
+      ddl-auto: update
+      enable_lazy_load_no_trans : true
+      event:
+          merge:
+            entity_copy_observer: allow
+    show-sql: true  
     properties:
-      hibernate:
-        format_sql: true
-  h2:
-    console.enabled: true  
+      hibernate.format_sql: true
 
 #springdoc.show-actuator: true
   

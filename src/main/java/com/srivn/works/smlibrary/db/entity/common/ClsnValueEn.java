@@ -30,13 +30,13 @@ import lombok.NoArgsConstructor;
 public class ClsnValueEn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "CLSN_VAL_SEQ")
-	@SequenceGenerator(name = "CLSN_VAL_SEQ", sequenceName = "CLSN_VAL_SEQ", initialValue = 1000,allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_clsn_val")
+	@SequenceGenerator(name = "seq_clsn_val", sequenceName = "seq_clsn_val", initialValue = 1000,allocationSize = 1)
 	@Column(name = "CLSN_VAL_ID")
 	private int clsnValId;
 	
 	@Column(name = "CLSN_VALUE")
-	private String clsnVal;
+	private String clsnValue;
 
 	@ManyToOne
 	@JoinColumn(name = "CLSN_ID")

@@ -8,5 +8,5 @@ import com.srivn.works.smlibrary.db.entity.common.ClsnValueEn;
 @Repository
 public interface ClsnValueRepo extends CrudRepository<ClsnValueEn, Integer>{
 
-	ClsnValueEn findByClsnVal(String clsnVal);
+	ClsnValueEn findByClsnValue(String clsnValue);
 }

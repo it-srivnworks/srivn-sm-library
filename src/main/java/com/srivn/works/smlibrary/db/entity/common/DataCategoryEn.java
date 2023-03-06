@@ -23,18 +23,18 @@ import lombok.Setter;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "CLSN")
+@Table(name = "DATA_CAT")
 @Cacheable
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class ClsnEn {
+public class DataCategoryEn {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_clsn")
-	@SequenceGenerator(name = "seq_clsn", sequenceName = "seq_clsn", initialValue = 100, allocationSize = 1)
-	@Column(name = "CLSN_ID")
-	private int clsnId;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "seq_catId")
+	@SequenceGenerator(name = "seq_catId", sequenceName = "seq_catId", initialValue = 100, allocationSize = 1)
+	@Column(name = "CAT_ID")
+	private int catId;
 
-	@Column(name = "CLSN_DS")
-	private String clsnDes;
+	@Column(name = "CAT_VALUE")
+	private String catValue;
 
 }
