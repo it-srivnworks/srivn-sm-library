@@ -16,20 +16,16 @@ import com.srivn.works.smlibrary.db.repo.common.ClsnValueRepo;
 import com.srivn.works.smlibrary.db.repo.common.DataCatRepo;
 import com.srivn.works.smlibrary.db.repo.common.DataValueRepo;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class UtilServices {
 
-	@Autowired
-	ClsnRepo clsnRepo;
-
-	@Autowired
-	ClsnValueRepo clsnValueRepo;
-
-	@Autowired
-	DataCatRepo dataCatRepo;
-	
-	@Autowired
-	DataValueRepo dataValueRepo;
+	private final ClsnRepo clsnRepo;
+	private final ClsnValueRepo clsnValueRepo;
+	private final DataCatRepo dataCatRepo;
+	private final DataValueRepo dataValueRepo;
 	
 	public ClsnEn addClsn(String clsnDesc) {
 		return clsnRepo.save(ClsnEn.builder().clsnDes(clsnDesc).build());

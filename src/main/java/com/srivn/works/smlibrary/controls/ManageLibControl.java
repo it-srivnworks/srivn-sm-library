@@ -1,6 +1,5 @@
 package com.srivn.works.smlibrary.controls;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,17 +9,18 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.srivn.works.smlibrary.model.BookInfo;
 import com.srivn.works.smlibrary.service.ManageLibService;
 
+import lombok.RequiredArgsConstructor;
+
 
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("manage")
 public class ManageLibControl {
 
-	@Autowired
-	ManageLibService manageLibService;
+	private final ManageLibService manageLibService;
 	
 	@PostMapping(value = "/addNewBook", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addNewBook(@RequestBody BookInfo bookInfo) {

@@ -15,19 +15,22 @@ import com.srivn.works.smlibrary.db.entity.common.ClsnEn;
 import com.srivn.works.smlibrary.db.mapper.CustomBookInfoMapper;
 import com.srivn.works.smlibrary.db.repo.AuthorInfoRepo;
 import com.srivn.works.smlibrary.db.repo.BookInfoRepo;
+import com.srivn.works.smlibrary.db.repo.common.ClsnRepo;
+import com.srivn.works.smlibrary.db.repo.common.ClsnValueRepo;
+import com.srivn.works.smlibrary.db.repo.common.DataCatRepo;
+import com.srivn.works.smlibrary.db.repo.common.DataValueRepo;
 import com.srivn.works.smlibrary.model.BookInfo;
 
+import lombok.RequiredArgsConstructor;
+
 @Service
+@RequiredArgsConstructor
 public class ManageLibService {
 
-	@Autowired
-	BookInfoRepo bookRepo;
+	private final BookInfoRepo bookRepo;
+	private final AuthorInfoRepo authorInfoRepo;
 	
-	@Autowired
-	AuthorInfoRepo authorInfoRepo;
-	
-	@Autowired
-	CustomBookInfoMapper customBookInfoMapper;
+	private final CustomBookInfoMapper customBookInfoMapper;
 	
     private static final Logger logger = LoggerFactory.getLogger(ManageLibService.class);
     

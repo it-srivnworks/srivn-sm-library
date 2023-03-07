@@ -10,15 +10,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.srivn.works.smlibrary.db.mapper.CustomBookInfoMapper;
+import com.srivn.works.smlibrary.db.repo.AuthorInfoRepo;
+import com.srivn.works.smlibrary.db.repo.BookInfoRepo;
 import com.srivn.works.smlibrary.service.UtilServices;
 
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequiredArgsConstructor
 @RequestMapping("utils")
 public class UtilControls {
 
 
-	@Autowired
-	UtilServices utilServices;
+	private final UtilServices utilServices;
 	
 	@PostMapping(value = "/addClsnDes", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addClsnDes(@RequestParam String clsnDes) {
