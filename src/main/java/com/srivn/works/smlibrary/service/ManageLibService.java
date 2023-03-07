@@ -40,6 +40,10 @@ public class ManageLibService {
 	public BookInfo getBookByTitle(String bookTitle){
 		return customBookInfoMapper.EnToDTO(bookRepo.findByTitle(bookTitle));
 	}
+	
+	public  List<BookInfo> getBookAll(){
+		return bookRepo.findAll().stream().map(bookEn-> customBookInfoMapper.EnToDTO(bookEn)).collect(Collectors.toList());
+	}
 
 	public AuthorInfoEn addNewAuthor(String authorName) {
 		return authorInfoRepo.save(AuthorInfoEn.builder().authorName(authorName).build());

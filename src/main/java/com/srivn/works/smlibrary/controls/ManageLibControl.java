@@ -32,6 +32,12 @@ public class ManageLibControl {
 		return new ResponseEntity<>(manageLibService.getBookByTitle(bookTitle), HttpStatus.OK);
 	}
 	
+	@GetMapping(value = "/getBookAll" , produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getBookAll() {
+		return new ResponseEntity<>(manageLibService.getBookAll(), HttpStatus.OK);
+	}
+	
+	
 	@PostMapping(value = "/addNewAuthor" , produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> addNewAuthor(String authorName) {
 		return new ResponseEntity<>(manageLibService.addNewAuthor(authorName), HttpStatus.OK);
