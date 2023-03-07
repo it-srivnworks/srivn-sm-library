@@ -33,15 +33,15 @@ public class BookInfoEn {
 	private String isbn;
 	
 	@ManyToOne
-	@JoinColumn(name = "authorId")
+	@JoinColumn(name = "AUTHOR_ID")
 	private AuthorInfoEn author;
 
 	@ManyToOne
-	@JoinColumn(name = "DATA_VALUE_ID")
+	@JoinColumn(name = "DV_ID_PUBLICATION")
 	private DataValueEn publlication;
 	
 	@ManyToOne
-	@JoinColumn(name = "CLSN_VAL_ID")
+	@JoinColumn(name = "CV_ID_CATEGORY")
 	private ClsnValueEn category;
 
 	@Column(name = "units")
