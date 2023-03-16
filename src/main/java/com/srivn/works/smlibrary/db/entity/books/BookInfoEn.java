@@ -12,9 +12,10 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+import lombok.Builder;
 import lombok.Data;
 
-
+@Builder
 @Data
 @Entity
 @Table(name = "BOOK_INFO")
