@@ -2,16 +2,17 @@ package com.srivn.works.smlibrary.util;
 
 import jakarta.annotation.Nullable;
 
-public class AppConstants {
+public class AppMsg {
 
-	public enum ErrorMessage {
-		ERROR_0000("UNKNOWN", "Unknown Error, Please Try Again!"), ERROR_0001("DNF", "%s not found"),
-		ERROR_0002("DUP", "%s already present.");
+	public enum Err {
+		ERR_000("UNKNOWN", "Unknown Error, Please Try Again!"), 
+		ERR_001("DNF", "%s not found"),
+		ERR_002("DUP", "%s already present.");
 
 		private final String code;
 		private final String msg;
 
-		ErrorMessage(String code, String msg) {
+		Err(String code, String msg) {
 			this.code = code;
 			this.msg = msg;
 		}
@@ -30,13 +31,14 @@ public class AppConstants {
 
 	}
 
-	public enum AppMessages {
-		MSG_0001("ADDED", "Data Saved succesfully");
+	public enum Msg {
+		MSG_000("OK", "Howdy!"),
+		MSG_001("ADDED", "Data Saved succesfully");
 
 		private final String code;
 		private final String msg;
 
-		AppMessages(String code, String msg) {
+		Msg(String code, String msg) {
 			this.code = code;
 			this.msg = msg;
 		}

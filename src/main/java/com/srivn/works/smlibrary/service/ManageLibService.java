@@ -22,7 +22,7 @@ import com.srivn.works.smlibrary.db.repo.common.DataValueRepo;
 import com.srivn.works.smlibrary.exception.SMException;
 import com.srivn.works.smlibrary.exception.SMMessage;
 import com.srivn.works.smlibrary.model.BookInfo;
-import com.srivn.works.smlibrary.util.AppConstants;
+import com.srivn.works.smlibrary.util.AppMsg;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,46 +41,94 @@ public class ManageLibService {
 		try {
 			if (bookRepo.findByTitle(bookInfo.getTitle()) == null) {
 				BookInfoEn bookInfoEn = customBookInfoMapper.DTOToEn(bookInfo);
-				bookInfo = customBookInfoMapper.EnToDTO(bookRepo.save(bookInfoEn));
-				return SMMessage.builder().code(AppConstants.AppMessages.MSG_0001.getCode())
-						.message(AppConstants.AppMessages.MSG_0001.getMsg()).build();
+				customBookInfoMapper.EnToDTO(bookRepo.save(bookInfoEn));
+				return SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+						.build();
 			} else {
-				throw new SMException(AppConstants.ErrorMessage.ERROR_0002.getCode(),
-						AppConstants.ErrorMessage.ERROR_0002.getMsgWithParam("Book"));
+				throw new SMException(AppMsg.Err.ERR_002.getCode(), AppMsg.Err.ERR_002.getMsgWithParam("Book"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppConstants.ErrorMessage.ERROR_0000.getCode(),
-					AppConstants.ErrorMessage.ERROR_0000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
 		}
 
 	}
 
 	public BookInfo getBookByTitle(String bookTitle) {
-		BookInfoEn bookInfoEn = bookRepo.findByTitle(bookTitle);
-		if (bookInfoEn != null) {
-			return customBookInfoMapper.EnToDTO(bookInfoEn);
-		} else {
-			throw new SMException(AppConstants.ErrorMessage.ERROR_0001.getCode(),
-					AppConstants.ErrorMessage.ERROR_0001.getMsgWithParam("Book"));
+		try {
+			BookInfoEn bookInfoEn = bookRepo.findByTitle(bookTitle);
+			if (bookInfoEn != null) {
+				return customBookInfoMapper.EnToDTO(bookInfoEn);
+			} else {
+				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Book"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
 		}
 	}
 
 	public List<BookInfo> getBookAll() {
-		return bookRepo.findAll().stream().map(bookEn -> customBookInfoMapper.EnToDTO(bookEn))
-				.collect(Collectors.toList());
+		try {
+			List<BookInfoEn> enList = bookRepo.findAll();
+			if (!enList.isEmpty()) {
+				return enList.stream().map(bookEn -> customBookInfoMapper.EnToDTO(bookEn)).collect(Collectors.toList());
+			} else {
+				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Books"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+		}
 	}
 
-	public AuthorInfoEn addNewAuthor(String authorName) {
-		return authorInfoRepo.save(AuthorInfoEn.builder().authorName(authorName).build());
+	public SMMessage addNewAuthor(String authorName) {
+		try {
+			if (authorInfoRepo.findByAuthorName(authorName) == null) {
+				authorInfoRepo.save(AuthorInfoEn.builder().authorName(authorName).build());
+				return SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+						.build();
+			} else {
+				throw new SMException(AppMsg.Err.ERR_002.getCode(), AppMsg.Err.ERR_002.getMsgWithParam("Author"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+		}
 	}
 
-	public AuthorInfoEn getAuthorByName(String authorName) {
-		return authorInfoRepo.findByAuthorName(authorName);
+	public String getAuthorByName(String authorName) {
+		try {
+			AuthorInfoEn authoeEn = authorInfoRepo.findByAuthorName(authorName);
+			if (authoeEn != null) {
+				return authoeEn.getAuthorName();
+			} else {
+				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Author"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+		}
 	}
 
-	public List<AuthorInfoEn> getAuthorAll() {
-		return StreamSupport.stream(authorInfoRepo.findAll().spliterator(), false).collect(Collectors.toList());
+	public List<String> getAuthorAll() {
+		try {
+			List<AuthorInfoEn> enList = authorInfoRepo.findAll();
+			if (!enList.isEmpty()) {
+				return StreamSupport.stream(enList.spliterator(), false)
+						.map((en) -> en.getAuthorName()).collect(Collectors.toList());
+			} else {
+				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Authors"));
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+		}
 	}
 }
