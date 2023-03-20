@@ -70,7 +70,7 @@ public class ManageLibControl {
 	}
 
 	@GetMapping(value = "/getAuthorAll", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<?> getBookByTitle() {
+	public ResponseEntity<?> getAuthorAll() {
 		try {
 			return new ResponseEntity<>(manageLibService.getAuthorAll(), HttpStatus.OK);
 		} catch (SMException sme) {

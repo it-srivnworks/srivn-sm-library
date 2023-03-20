@@ -3,10 +3,7 @@ package com.srivn.works.smlibrary.service;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.srivn.works.smlibrary.db.entity.common.ClsnEn;
 import com.srivn.works.smlibrary.db.entity.common.ClsnValueEn;
 import com.srivn.works.smlibrary.db.entity.common.DataCategoryEn;
