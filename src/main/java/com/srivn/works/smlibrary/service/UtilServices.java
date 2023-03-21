@@ -84,4 +84,5 @@ public class UtilServices {
 	public List<DataValueEn> getDataValueAll() {
 		return StreamSupport.stream(dataValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
 	}
+	
 }
