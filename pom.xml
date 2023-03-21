@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.srivn.works</groupId>
 	<artifactId>smlibrary</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>smlibrary</name>
 	<description>SM Library Service</description>
 	<properties>
