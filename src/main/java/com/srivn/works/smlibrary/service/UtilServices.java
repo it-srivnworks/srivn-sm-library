@@ -85,13 +85,4 @@ public class UtilServices {
 		return StreamSupport.stream(dataValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
 	}
 	
-	public void testDuplicateCode1() {
-		int x = 1;
-		int y= 2+x ;
-	}
-	
-	public void testDuplicateCode2() {
-		int x = 1;
-		int y= 2+x ;
-	}
 }
