@@ -62,8 +62,17 @@ public class UtilServices {
 	}
 
 	public List<ClsnEn> getClsnAll() {
-		return StreamSupport.stream(clsnRepo.findAll().spliterator(), false).collect(Collectors.toList());
+		try {
+			List<ClsnEn> enList =  StreamSupport.stream(clsnRepo.findAll().spliterator(), false).collect(Collectors.toList());
+		if (enList != null) {
+			return enList;
+		} else {
+			throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnVal));
+		}
+	} catch (Exception e) {
+		throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
 	}
+}
 
 	public List<ClsnValueEn> getClsnValAll() {
 		return StreamSupport.stream(clsnValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
