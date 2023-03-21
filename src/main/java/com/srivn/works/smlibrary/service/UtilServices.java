@@ -67,7 +67,7 @@ public class UtilServices {
 		if (enList != null) {
 			return enList;
 		} else {
-			throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnVal));
+			throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Clsn List"));
 		}
 	} catch (Exception e) {
 		throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
