@@ -27,7 +27,7 @@ public class UtilServices {
 	private final DataValueRepo dataValueRepo;
 
 	public ClsnEn addClsn(String clsnDesc) {
-			return clsnRepo.save(ClsnEn.builder().clsnDes(clsnDesc).build());
+		return clsnRepo.save(ClsnEn.builder().clsnDes(clsnDesc).build());
 	}
 
 	public ClsnValueEn addClsnValue(String clsnDes, String clsnValue) {
@@ -37,9 +37,9 @@ public class UtilServices {
 
 	public ClsnEn getByClsnDes(String clsnDesc) {
 		try {
-			ClsnEn clsnEn = clsnRepo.findByClsnDes(clsnDesc);
-			if (clsnEn != null) {
-				return clsnEn;
+			ClsnEn en = clsnRepo.findByClsnDes(clsnDesc);
+			if (en != null) {
+				return en;
 			} else {
 				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnDesc));
 			}
@@ -49,7 +49,16 @@ public class UtilServices {
 	}
 
 	public ClsnValueEn getByClsnValue(String clsnVal) {
-		return clsnValueRepo.findByClsnValue(clsnVal);
+		try {
+			ClsnValueEn en = clsnValueRepo.findByClsnValue(clsnVal);
+			if (en != null) {
+				return en;
+			} else {
+				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnVal));
+			}
+		} catch (Exception e) {
+			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+		}
 	}
 
 	public List<ClsnEn> getClsnAll() {
@@ -84,5 +93,5 @@ public class UtilServices {
 	public List<DataValueEn> getDataValueAll() {
 		return StreamSupport.stream(dataValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
 	}
-	
+
 }
