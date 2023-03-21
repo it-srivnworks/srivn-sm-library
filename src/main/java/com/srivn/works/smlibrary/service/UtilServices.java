@@ -103,7 +103,4 @@ public class UtilServices {
 		return StreamSupport.stream(dataValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
 	}
 
-	public void test() {
-		
-	}
 }
