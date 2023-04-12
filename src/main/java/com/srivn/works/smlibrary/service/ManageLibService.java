@@ -42,15 +42,15 @@ public class ManageLibService {
 			if (bookRepo.findByTitle(bookInfo.getTitle()) == null) {
 				BookInfoEn bookInfoEn = customBookInfoMapper.DTOToEn(bookInfo);
 				customBookInfoMapper.EnToDTO(bookRepo.save(bookInfoEn));
-				return SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+				return SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg())
 						.build();
 			} else {
-				throw new SMException(AppMsg.Err.ERR_002.getCode(), AppMsg.Err.ERR_002.getMsgWithParam("Book"));
+				throw new SMException(AppMsg.Err.ERR_DUP_002.getCode(), AppMsg.Err.ERR_DUP_002.getMsgWithParam("Book"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 
 	}
@@ -61,12 +61,12 @@ public class ManageLibService {
 			if (bookInfoEn != null) {
 				return customBookInfoMapper.EnToDTO(bookInfoEn);
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Book"));
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgWithParam("Book"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 	}
 
@@ -76,12 +76,12 @@ public class ManageLibService {
 			if (!enList.isEmpty()) {
 				return enList.stream().map(bookEn -> customBookInfoMapper.EnToDTO(bookEn)).collect(Collectors.toList());
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Books"));
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgWithParam("Books"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 	}
 
@@ -89,15 +89,15 @@ public class ManageLibService {
 		try {
 			if (authorInfoRepo.findByAuthorName(authorName) == null) {
 				authorInfoRepo.save(AuthorInfoEn.builder().authorName(authorName).build());
-				return SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+				return SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg())
 						.build();
 			} else {
-				throw new SMException(AppMsg.Err.ERR_002.getCode(), AppMsg.Err.ERR_002.getMsgWithParam("Author"));
+				throw new SMException(AppMsg.Err.ERR_DUP_002.getCode(), AppMsg.Err.ERR_DUP_002.getMsgWithParam("Author"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 	}
 
@@ -107,12 +107,12 @@ public class ManageLibService {
 			if (authoeEn != null) {
 				return authoeEn.getAuthorName();
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Author"));
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgWithParam("Author"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 	}
 
@@ -123,12 +123,12 @@ public class ManageLibService {
 				return StreamSupport.stream(enList.spliterator(), false)
 						.map((en) -> en.getAuthorName()).collect(Collectors.toList());
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("Authors"));
+				throw new SMException(AppMsg.Err.ERR__DNF_001.getCode(), AppMsg.Err.ERR__DNF_001.getMsgWithParam("Authors"));
 			}
 		} catch (SMException e) {
 			throw e;
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw new SMException(AppMsg.Err.ERR_UKN_000.getCode(), AppMsg.Err.ERR_UKN_000.getMsgWithParam());
 		}
 	}
 }

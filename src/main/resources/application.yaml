@@ -1,19 +1,23 @@
 server:
-  port: 8092
+  port : 8092
   servlet:
     context-path: /sm-library
+    multipart:
+      enabled: true
+      max-file-size: 1GB
+      max-request-size: 1GB
 spring:
-  profiles:
-   active: test
+    profiles.active: localdev
 ---
 spring:
   config:
     activate:
-      on-profile: dev
+      on-profile: localdev
   datasource:
-    url: jdbc:mysql://localhost:3306/smaster
-    username: smaster
-    password: smaster
+    url: jdbc:h2:file:./data/demo
+    username: sa
+    password: sa
+    driverClassName: org.h2.Driver
   jpa:
     hibernate:
       ddl-auto: update
@@ -32,10 +36,11 @@ spring:
 #management.server.port: 8092
 
 ---
+---
 spring:
   config:
     activate:
-      on-profile: test
+      on-profile: test    
   datasource:
     url: jdbc:h2:file:./data/demo
     username: sa

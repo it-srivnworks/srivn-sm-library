@@ -59,7 +59,7 @@ class ManageLibControlTest {
 	@Test
 	@DisplayName("Positive : Adding new Book entry")
 	void testAddNewBook01P() throws Exception {
-		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg())
 				.build();
 		when(manageLibService.addNewBook(bookInfo)).thenReturn(msg);
 		mockMvc.perform(post("/manage/addNewBook").contentType(MediaType.APPLICATION_JSON_VALUE).content(bookInfoStr))
@@ -109,7 +109,7 @@ class ManageLibControlTest {
 	@Test
 	@DisplayName("Positive :Add New Author")
 	void testAddNewAuthor01P() throws Exception {
-		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg())
+		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg())
 				.build();
 		when(manageLibService.addNewAuthor("AUTHOR")).thenReturn(msg);
 		mockMvc.perform(post("/manage/addNewAuthor").contentType(MediaType.APPLICATION_JSON_VALUE)

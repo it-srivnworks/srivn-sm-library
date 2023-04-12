@@ -17,7 +17,7 @@ public class WelcomeControl {
 	@GetMapping(value = "/tester", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<SMMessage> tester() {
 		System.out.println("Tester");
-		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_000.getCode()).message(AppMsg.Msg.MSG_000.getMsg()).build();
+		SMMessage msg = SMMessage.builder().code(AppMsg.Msg.MSG_OK_000.getCode()).message(AppMsg.Msg.MSG_OK_000.getMsg()).build();
 		return new ResponseEntity<>(msg, HttpStatus.OK);
 	}
 }

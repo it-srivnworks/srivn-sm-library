@@ -13,6 +13,7 @@ import com.srivn.works.smlibrary.db.repo.common.ClsnValueRepo;
 import com.srivn.works.smlibrary.db.repo.common.DataCatRepo;
 import com.srivn.works.smlibrary.db.repo.common.DataValueRepo;
 import com.srivn.works.smlibrary.exception.SMException;
+import com.srivn.works.smlibrary.exception.SMMessage;
 import com.srivn.works.smlibrary.util.AppMsg;
 
 import lombok.RequiredArgsConstructor;
@@ -21,19 +22,36 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UtilServices {
 
-	
 	private final ClsnRepo clsnRepo;
 	private final ClsnValueRepo clsnValueRepo;
 	private final DataCatRepo dataCatRepo;
 	private final DataValueRepo dataValueRepo;
 
-	public ClsnEn addClsn(String clsnDesc) {
-		return clsnRepo.save(ClsnEn.builder().clsnDes(clsnDesc).build());
+	public SMMessage addClsn(String clsnDesc) {
+		try {
+			if (clsnRepo.findByClsnDes(clsnDesc) == null) {
+				clsnRepo.save(ClsnEn.builder().clsnDes(clsnDesc).build());
+				return SMMessage.getSMMessage(AppMsg.Msg.MSG_ADD_001);
+			} else {
+				throw SMException.getSMException(AppMsg.Err.ERR_DUP_002, "ClsnDesc");
+			}
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
+		}
 	}
 
-	public ClsnValueEn addClsnValue(String clsnDes, String clsnValue) {
-		ClsnEn clsnEn = clsnRepo.findByClsnDes(clsnDes);
-		return clsnValueRepo.save(ClsnValueEn.builder().clsn(clsnEn).clsnValue(clsnValue).build());
+	public SMMessage addClsnValue(String clsnDes, String clsnValue) {
+		try {
+			ClsnEn clsnEn = getByClsnDes(clsnDes);
+			ClsnValueEn clsnValueEn = getByClsnValue(clsnValue);
+			return SMMessage.getSMMessage(AppMsg.Msg.MSG_ADD_001);
+		} catch (SMException e) {
+			throw e;
+		} catch (Exception e) {
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
+		}
 	}
 
 	public ClsnEn getByClsnDes(String clsnDesc) {
@@ -42,10 +60,10 @@ public class UtilServices {
 			if (en != null) {
 				return en;
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnDesc));
+				throw SMException.getSMException(AppMsg.Err.ERR__DNF_001, clsnDesc);
 			}
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
 		}
 	}
 
@@ -55,30 +73,49 @@ public class UtilServices {
 			if (en != null) {
 				return en;
 			} else {
-				throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam(clsnVal));
+				throw SMException.getSMException(AppMsg.Err.ERR__DNF_001, clsnVal);
 			}
 		} catch (Exception e) {
-			throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
 		}
 	}
 
 	public List<ClsnEn> getClsnAll() {
 		try {
-			List<ClsnEn> enList =  StreamSupport.stream(clsnRepo.findAll().spliterator(), false).collect(Collectors.toList());
-		if (enList != null) {
-			return enList;
-		} else {
-			throw new SMException(AppMsg.Err.ERR_001.getCode(), AppMsg.Err.ERR_001.getMsgWithParam("CLSNList"));
+			List<ClsnEn> enList = StreamSupport.stream(clsnRepo.findAll().spliterator(), false)
+					.collect(Collectors.toList());
+			if (!enList.isEmpty()) {
+				return enList;
+			} else {
+				throw SMException.getSMException(AppMsg.Err.ERR__DNF_001, "CLSNList");
+			}
+		} catch (Exception e) {
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
 		}
-	} catch (Exception e) {
-		throw new SMException(AppMsg.Err.ERR_000.getCode(), AppMsg.Err.ERR_000.getMsgWithParam());
 	}
-}
 
 	public List<ClsnValueEn> getClsnValAll() {
-		return StreamSupport.stream(clsnValueRepo.findAll().spliterator(), false).collect(Collectors.toList());
+		try {
+			List<ClsnValueEn> enList = StreamSupport.stream(clsnValueRepo.findAll().spliterator(), false)
+					.collect(Collectors.toList());
+			if (!enList.isEmpty()) {
+				return enList;
+			} else {
+				throw SMException.getSMException(AppMsg.Err.ERR__DNF_001, "ClsnValueList");
+			}
+		} catch (Exception e) {
+			throw SMException.getSMException(AppMsg.Err.ERR_UKN_000, null);
+		}
 	}
 
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * ***********************************/
 	public DataCategoryEn addDataCat(String dataCategory) {
 		return dataCatRepo.save(DataCategoryEn.builder().catValue(dataCategory).build());
 	}

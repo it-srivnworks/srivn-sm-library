@@ -5,9 +5,9 @@ import jakarta.annotation.Nullable;
 public class AppMsg {
 
 	public enum Err {
-		ERR_000("UNKNOWN", "Unknown Error, Please Try Again!"), 
-		ERR_001("DNF", "%s not found"),
-		ERR_002("DUP", "%s already present.");
+		ERR_UKN_000("UNKNOWN", "Unknown Error, Please Try Again!"), 
+		ERR__DNF_001("DNF", "%s not found"),
+		ERR_DUP_002("DUP", "%s already present.");
 
 		private final String code;
 		private final String msg;
@@ -32,8 +32,8 @@ public class AppMsg {
 	}
 
 	public enum Msg {
-		MSG_000("OK", "Howdy!"),
-		MSG_001("ADDED", "Data Saved succesfully");
+		MSG_OK_000("OK", "Howdy!"),
+		MSG_ADD_001("ADDED", "Data Saved succesfully");
 
 		private final String code;
 		private final String msg;

@@ -71,7 +71,7 @@ class ManageLibServiceTest {
 		when(customBookInfoMapper.EnToDTO(en)).thenReturn(dto);
 		when(customBookInfoMapper.DTOToEn(dto)).thenReturn(en);
 		when(bookRepo.save(en)).thenReturn(en);
-		assertThat(manageLibService.addNewBook(dto)).isEqualTo(SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg()).build());
+		assertThat(manageLibService.addNewBook(dto)).isEqualTo(SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg()).build());
 }
 
 	@Test
@@ -160,7 +160,7 @@ class ManageLibServiceTest {
 	void testAddNewAuthor01P() {
 		when(authorInfoRepo.findByAuthorName("AUTHOR")).thenReturn(null);
 		when(authorInfoRepo.save(authorEn)).thenReturn(authorEn);
-		assertThat(manageLibService.addNewAuthor("AUTHOR")).isEqualTo(SMMessage.builder().code(AppMsg.Msg.MSG_001.getCode()).message(AppMsg.Msg.MSG_001.getMsg()).build());
+		assertThat(manageLibService.addNewAuthor("AUTHOR")).isEqualTo(SMMessage.builder().code(AppMsg.Msg.MSG_ADD_001.getCode()).message(AppMsg.Msg.MSG_ADD_001.getMsg()).build());
 }
 
 	@Test
